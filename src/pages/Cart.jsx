@@ -16,9 +16,14 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const payment = () => {
-    toast.success("Payment Successfully Done", {
+    toast.success("Please Wait", {
       duration: 2000,
     });
+    setTimeout(() => {
+      toast.success("Payment Successfully Done", {
+        duration: 2000,
+      });
+    }, 2000);
 
     setTimeout(() => {
       dispatch(clear());

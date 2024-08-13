@@ -10,7 +10,7 @@ const CartItem = ({ item }) => {
 
   const removeFromCart = () => {
     dispatch(remove(item.id));
-    toast.error("Item Removed From Cart");
+    toast.success("Item Removed From Cart");
   };
 
   const handleQuantityChange = (newQuantity) => {
@@ -33,6 +33,7 @@ const CartItem = ({ item }) => {
           <p className="text-base text-slate-700 font-medium">
             {item.description}
           </p>
+          <div className="hidden bg-red-500">BharatKushwah407</div>
           <p className="text-green-600 font-bold text-lg">${item.price}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
