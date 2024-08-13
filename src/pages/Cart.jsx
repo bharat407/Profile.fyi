@@ -1,15 +1,17 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { NavLink } from "react-router-dom";
+import { clear } from "../redux/Slices/cartSlice";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const [amount, setAmount] = useState(0);
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const payment = () => {
@@ -18,6 +20,7 @@ const Cart = () => {
     });
 
     setTimeout(() => {
+      dispatch(clear());
       navigate("/thankyou");
     }, 2000);
   };
@@ -141,4 +144,3 @@ const Cart = () => {
 };
 
 export default Cart;
-  
