@@ -79,12 +79,42 @@ const Cart = () => {
     let validCoupon = false;
     switch (coupon) {
       case "SAVE10":
-        discountAmount = totalAmount * 0.1;
-        validCoupon = true;
+        if (totalAmount > 0) {
+          discountAmount = totalAmount * 0.1;
+          validCoupon = true;
+          if (totalAmount >= 300) {
+            toast(
+              "You could save even more with SAVE30! (Orders of $300 or more)",
+              {
+                duration: 4000,
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              }
+            );
+          }
+        }
         break;
       case "SAVE30":
-        discountAmount = totalAmount * 0.3;
-        validCoupon = true;
+        if (totalAmount >= 300) {
+          discountAmount = totalAmount * 0.3;
+          validCoupon = true;
+          if (totalAmount >= 500) {
+            toast(
+              "You could save even more with SAVE50! (Orders of $500 or more)",
+              {
+                duration: 4000,
+                style: {
+                  borderRadius: "10px",
+                  background: "#333",
+                  color: "#fff",
+                },
+              }
+            );
+          }
+        }
         break;
       case "SAVE50":
         if (totalAmount >= 500) {
