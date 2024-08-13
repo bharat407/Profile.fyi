@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { NavLink } from "react-router-dom";
 import { clear } from "../redux/Slices/cartSlice";
-import logo from "../components/profile-transparent-blue.svg";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state);
@@ -15,6 +14,17 @@ const Cart = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const payment = () => {
+    toast.success("Payment Successfully Done", {
+      duration: 2000,
+    });
+
+    setTimeout(() => {
+      dispatch(clear());
+      navigate("/thankyou");
+    }, 2000);
+  };
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -63,43 +73,6 @@ const Cart = () => {
     setAppliedCoupon(null);
     setCouponCode("");
     toast.success("Coupon removed");
-  };
-
-  const handlePayment = async () => {
-    toast.success("Please wait, processing payment...", {
-      duration: 2000,
-    });
-
-    setTimeout(() => {
-      const options = {
-        key: "rzp_test_6o6Suqp4azcEtb",
-        amount: amount,
-        currency: "INR",
-        name: "Profile",
-        description: "Thank you for shopping with us!",
-        image: logo,
-        handler: function (response) {
-          toast.success("Payment successful!", { duration: 2000 });
-          dispatch(clear());
-          navigate("/thankyou");
-        },
-        prefill: {
-          name: "Your Name",
-          email: "email@example.com",
-          contact: "9999999999",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
-
-      razorpay.on("payment.failed", function (response) {
-        toast.error("Payment failed. Please try again.");
-      });
-    }, 2000);
   };
 
   return (
@@ -196,7 +169,7 @@ const Cart = () => {
               </div>
 
               <button
-                onClick={handlePayment}
+                onClick={payment}
                 className="bg-green-700 hover:bg-green-900 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold p-3 text-xl"
               >
                 CheckOut Now
