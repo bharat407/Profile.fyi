@@ -49,12 +49,18 @@ const Cart = () => {
     }, 0);
 
     if (couponCode.trim().toUpperCase() === "SAVE10") {
-      const discountAmount = totalAmount * 0.1;
-      setDiscount(discountAmount);
-      setAppliedCoupon("SAVE10");
-      toast.success(
-        `Coupon applied successfully! 10% off ($${discountAmount.toFixed(2)})`
-      );
+      if (couponCode === "SAVE10") {
+        const discountAmount = totalAmount * 0.1;
+        setDiscount(discountAmount);
+        setAppliedCoupon("SAVE10");
+        toast.success(
+          `Coupon applied successfully! 10% off ($${discountAmount.toFixed(2)})`
+        );
+      } else {
+        setDiscount(0);
+        setAppliedCoupon(null);
+        toast.error("Invalid coupon code");
+      }
     } else {
       setDiscount(0);
       setAppliedCoupon(null);
