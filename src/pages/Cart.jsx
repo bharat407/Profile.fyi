@@ -12,6 +12,11 @@ const Cart = () => {
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [couponStatus, setCouponStatus] = useState({
+    SAVE10: false,
+    SAVE30: false,
+    SAVE50: false,
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +29,17 @@ const Cart = () => {
         duration: 2000,
       });
     }, 2000);
+    setTimeout(() => {
+      toast("Thanks for Shopping!! Visit Again", {
+        icon: "😊",
+        duration: 3000,
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }, 4000);
 
     setTimeout(() => {
       dispatch(clear());
@@ -41,6 +57,11 @@ const Cart = () => {
 
       const finalAmount = Math.max(totalAmount - discount, 0);
       setAmount(finalAmount);
+      setCouponStatus({
+        SAVE10: true,
+        SAVE30: totalAmount >= 300,
+        SAVE50: totalAmount >= 500,
+      });
     } else {
       setAmount(0);
     }
@@ -53,19 +74,38 @@ const Cart = () => {
       return acc + price * quantity;
     }, 0);
 
-    if (couponCode.trim().toUpperCase() === "SAVE10") {
-      if (couponCode === "SAVE10") {
-        const discountAmount = totalAmount * 0.1;
-        setDiscount(discountAmount);
-        setAppliedCoupon("SAVE10");
-        toast.success(
-          `Coupon applied successfully! 10% off ($${discountAmount.toFixed(2)})`
-        );
-      } else {
-        setDiscount(0);
-        setAppliedCoupon(null);
-        toast.error("Invalid coupon code");
-      }
+    const coupon = couponCode.trim();
+    let discountAmount = 0;
+    let validCoupon = false;
+    switch (coupon) {
+      case "SAVE10":
+        discountAmount = totalAmount * 0.1;
+        validCoupon = true;
+        break;
+      case "SAVE30":
+        discountAmount = totalAmount * 0.3;
+        validCoupon = true;
+        break;
+      case "SAVE50":
+        if (totalAmount >= 500) {
+          discountAmount = totalAmount * 0.5;
+          validCoupon = true;
+        }
+        break;
+      default:
+        validCoupon = false;
+        break;
+    }
+
+    if (validCoupon) {
+      setDiscount(discountAmount);
+      setAppliedCoupon(coupon);
+      toast.success(
+        `Coupon applied successfully! ${coupon.replace(
+          "SAVE",
+          ""
+        )}% off ($${discountAmount.toFixed(2)})`
+      );
     } else {
       setDiscount(0);
       setAppliedCoupon(null);
@@ -141,11 +181,45 @@ const Cart = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex items-center justify-between">
-                <span className="font-bold text-green-600">Coupon Code:</span>
-                <span className="font-bold text-red-600 bg-yellow-300 px-3 py-1 rounded-lg shadow-md animate-pulse mx-2">
-                  SAVE10
-                </span>
+              <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-wrap gap-2 items-center justify-between">
+                <span className="font-bold text-green-600">Coupon Codes:</span>
+                <div className="flex gap-2 flex-wrap">
+                  <span
+                    className={`font-bold ${
+                      couponStatus.SAVE10
+                        ? "text-red-600"
+                        : "text-gray-500 line-through"
+                    } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md`}
+                  >
+                    SAVE10
+                  </span>
+                  <span
+                    className={`font-bold ${
+                      couponStatus.SAVE30
+                        ? "text-red-600"
+                        : "text-gray-500 line-through"
+                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
+                  >
+                    SAVE30
+                  </span>
+                  <span
+                    className={`font-bold ${
+                      couponStatus.SAVE50
+                        ? "text-red-600"
+                        : "text-gray-500 line-through"
+                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
+                  >
+                    SAVE50
+                  </span>
+                </div>
+                <div className="mt-2 text-sm text-gray-600">
+                  <p>Applicable for total amount of:</p>
+                  <ul className="list-disc pl-5">
+                    <li>$10 off for all orders</li>
+                    <li>$30 off for orders of $300 and above</li>
+                    <li>$50 off for orders of $500 and above</li>
+                  </ul>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
