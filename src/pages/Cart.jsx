@@ -216,29 +216,32 @@ const Cart = () => {
                 <span className="font-bold text-green-600">Coupon Codes:</span>
                 <div className="flex gap-2 flex-wrap">
                   <span
+                    onClick={() => setCouponCode("SAVE10")}
                     className={`font-bold ${
                       couponStatus.SAVE10
                         ? "text-red-600"
                         : "text-gray-500 line-through"
-                    } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md`}
+                    } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md cursor-pointer`}
                   >
                     SAVE10
                   </span>
                   <span
+                    onClick={() => setCouponCode("SAVE30")}
                     className={`font-bold ${
                       couponStatus.SAVE30
                         ? "text-red-600"
                         : "text-gray-500 line-through"
-                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
+                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
                   >
                     SAVE30
                   </span>
                   <span
+                    onClick={() => setCouponCode("SAVE50")}
                     className={`font-bold ${
                       couponStatus.SAVE50
                         ? "text-red-600"
                         : "text-gray-500 line-through"
-                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
+                    } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
                   >
                     SAVE50
                   </span>

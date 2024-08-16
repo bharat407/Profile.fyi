@@ -7,7 +7,7 @@ import Thank from "./pages/Thank";
 const App = () => {
   return (
     <div>
-      <div className="bg-[#555555]">
+      <div className="bg-white shadow-md shadow-gray-400">
         <Navbar />
       </div>
       <Routes>

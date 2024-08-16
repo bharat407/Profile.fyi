@@ -4,6 +4,12 @@ import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { remove, updateQuantity } from "../redux/Slices/cartSlice";
 
+// Utility function to truncate text
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + "...";
+};
+
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(item.quantity || 1);
@@ -25,15 +31,15 @@ const CartItem = ({ item }) => {
   return (
     <div className="flex flex-col p-5 justify-between mt-2 mb-2 mx-5 border-b-[3px] border-slate-500">
       <div className="flex flex-row p-3 gap-5 items-center">
-        <div className="w-[30%]">
+        <div className="w-[35%]">
           <img alt="" src={item.image} className="object-cover" />
         </div>
-        <div className="w-[70%] self-start space-y-5 ml-5">
+        <div className="w-[80%] self-start space-y-5 ml-5">
           <h1 className="text-xl text-slate-700 font-semibold">{item.title}</h1>
           <p className="text-base text-slate-700 font-medium">
-            {item.description}
+            {truncateText(item.description, 100)}{" "}
+            {/* Adjust 100 to your preferred length */}
           </p>
-          <div className="hidden bg-red-500">BharatKushwah407</div>
           <p className="text-green-600 font-bold text-lg">${item.price}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
