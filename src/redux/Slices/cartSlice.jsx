@@ -16,7 +16,7 @@ export const CartSlice = createSlice({
       if (item) {
         item.quantity = quantity;
       }
-    },
+    }, 
     clear: (state) => {
       return [];
     },
