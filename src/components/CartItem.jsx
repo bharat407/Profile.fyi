@@ -29,45 +29,52 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex flex-col p-5 justify-between mt-2 mb-2 mx-5 border-b-[3px] border-slate-500 sm:mx-3">
-      <div className="flex flex-col sm:flex-row sm:gap-5 items-center">
-        <div className="w-full sm:w-[35%] mb-4 sm:mb-0">
-          <img alt="" src={item.image} className="w-full h-auto object-cover" />
+    <div className="flex flex-col p-4 md:p-5 justify-between mt-2 mb-2 mx-2 md:mx-5 border-b-[2px] border-slate-300 md:border-slate-500">
+      <div className="flex flex-col md:flex-row items-start md:items-center md:gap-6">
+        <div className="w-full md:w-[35%] flex justify-center mb-4 md:mb-0">
+          <img
+            alt=""
+            src={item.image}
+            className="w-[50%] h-auto object-cover"
+          />
         </div>
-        <div className="w-full sm:w-[65%] ml-0 sm:ml-5">
-          <h1 className="text-lg sm:text-xl text-slate-700 font-semibold">
+        <div className="w-full md:w-[60%] md:ml-6">
+          <h1 className="text-lg md:text-xl text-slate-800 font-semibold mb-2">
             {item.title}
           </h1>
-          <p className="text-sm sm:text-base text-slate-700 font-medium">
+          <p className="text-sm md:text-base text-slate-600 mb-2">
             {truncateText(item.description, 80)}{" "}
             {/* Adjust 80 to your preferred length */}
           </p>
-          <p className="text-green-600 font-bold text-base sm:text-lg">
+          <p className="text-green-600 font-bold text-base md:text-lg mb-2">
             ${item.price}
           </p>
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5 mt-2">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-row">
+            {" "}
+            <div className="flex flex-row items-start gap-5 ">
+              <div className="flex items-center gap-2 mb-2 md:mb-0">
+                <button
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
+                >
+                  -
+                </button>
+                <p className="text-base md:text-lg font-medium">{quantity}</p>
+                <button
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
+                >
+                  +
+                </button>
+              </div>
+
               <button
-                onClick={() => handleQuantityChange(quantity - 1)}
-                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm sm:text-base"
+                className="text-red-700 bg-red-200 hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-2 md:p-3"
+                onClick={removeFromCart}
               >
-                -
-              </button>
-              <p className="text-base sm:text-lg font-medium">{quantity}</p>
-              <button
-                onClick={() => handleQuantityChange(quantity + 1)}
-                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm sm:text-base"
-              >
-                +
+                <AiFillDelete className="text-lg md:text-xl" />
               </button>
             </div>
-
-            <button
-              className="text-red-800 bg-red-200 group hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-2 sm:p-3 mr-3"
-              onClick={removeFromCart}
-            >
-              <AiFillDelete className="text-lg sm:text-xl" />
-            </button>
           </div>
         </div>
       </div>
