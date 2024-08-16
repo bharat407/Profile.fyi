@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Thank = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-center items-center h-[86vh] overflow-hidden bg-gray-100 px-4 sm:px-6 lg:px-8">
       <div className="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-lg text-center max-w-md mx-auto">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mb-4">
           Thank You for Shopping!
