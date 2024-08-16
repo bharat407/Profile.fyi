@@ -29,40 +29,44 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex flex-col p-5 justify-between mt-2 mb-2 mx-5 border-b-[3px] border-slate-500">
-      <div className="flex flex-row p-3 gap-5 items-center">
-        <div className="w-[35%]">
-          <img alt="" src={item.image} className="object-cover" />
+    <div className="flex flex-col p-5 justify-between mt-2 mb-2 mx-5 border-b-[3px] border-slate-500 sm:mx-3">
+      <div className="flex flex-col sm:flex-row sm:gap-5 items-center">
+        <div className="w-full sm:w-[35%] mb-4 sm:mb-0">
+          <img alt="" src={item.image} className="w-full h-auto object-cover" />
         </div>
-        <div className="w-[80%] self-start space-y-5 ml-5">
-          <h1 className="text-xl text-slate-700 font-semibold">{item.title}</h1>
-          <p className="text-base text-slate-700 font-medium">
-            {truncateText(item.description, 100)}{" "}
-            {/* Adjust 100 to your preferred length */}
+        <div className="w-full sm:w-[65%] ml-0 sm:ml-5">
+          <h1 className="text-lg sm:text-xl text-slate-700 font-semibold">
+            {item.title}
+          </h1>
+          <p className="text-sm sm:text-base text-slate-700 font-medium">
+            {truncateText(item.description, 80)}{" "}
+            {/* Adjust 80 to your preferred length */}
           </p>
-          <p className="text-green-600 font-bold text-lg">${item.price}</p>
-          <div className="flex items-center justify-between">
+          <p className="text-green-600 font-bold text-base sm:text-lg">
+            ${item.price}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5 mt-2">
             <div className="flex items-center gap-2">
               <button
                 onClick={() => handleQuantityChange(quantity - 1)}
-                className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
+                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm sm:text-base"
               >
                 -
               </button>
-              <p className="text-lg font-medium">{quantity}</p>
+              <p className="text-base sm:text-lg font-medium">{quantity}</p>
               <button
                 onClick={() => handleQuantityChange(quantity + 1)}
-                className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md"
+                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm sm:text-base"
               >
                 +
               </button>
             </div>
 
             <button
-              className="text-red-800 bg-red-200 group hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-3 mr-3"
+              className="text-red-800 bg-red-200 group hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-2 sm:p-3 mr-3"
               onClick={removeFromCart}
             >
-              <AiFillDelete />
+              <AiFillDelete className="text-lg sm:text-xl" />
             </button>
           </div>
         </div>
