@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const Thank = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/");
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div className="flex justify-center items-center h-[86vh] overflow-hidden bg-gray-100 px-4 sm:px-6 lg:px-8">
       <div className="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-lg text-center max-w-md mx-auto">
