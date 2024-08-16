@@ -49,32 +49,28 @@ const CartItem = ({ item }) => {
           <p className="text-green-600 font-bold text-base md:text-lg mb-2">
             ${item.price}
           </p>
-          <div className="flex flex-row">
-            {" "}
-            <div className="flex flex-row items-start gap-5 ">
-              <div className="flex items-center gap-2 mb-2 md:mb-0">
-                <button
-                  onClick={() => handleQuantityChange(quantity - 1)}
-                  className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
-                >
-                  -
-                </button>
-                <p className="text-base md:text-lg font-medium">{quantity}</p>
-                <button
-                  onClick={() => handleQuantityChange(quantity + 1)}
-                  className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
-                >
-                  +
-                </button>
-              </div>
-
+          <div className="flex items-center justify-between mt-3 md:mb-0">
+            <div className="flex items-center gap-2">
               <button
-                className="text-red-700 bg-red-200 hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-2 md:p-3"
-                onClick={removeFromCart}
+                onClick={() => handleQuantityChange(quantity - 1)}
+                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
               >
-                <AiFillDelete className="text-lg md:text-xl" />
+                -
+              </button>
+              <p className="text-base md:text-lg font-medium">{quantity}</p>
+              <button
+                onClick={() => handleQuantityChange(quantity + 1)}
+                className="px-2 py-1 bg-gray-200 text-gray-700 rounded-md text-sm md:text-base"
+              >
+                +
               </button>
             </div>
+            <button
+              className="text-red-700 bg-red-200 hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-2 md:p-3"
+              onClick={removeFromCart}
+            >
+              <AiFillDelete className="text-lg md:text-xl" />
+            </button>
           </div>
         </div>
       </div>
