@@ -1,4 +1,4 @@
-import logo from "./profile-transparent-blue.svg";
+import logo from "./logo.png";
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -9,18 +9,18 @@ const Navbar = () => {
     <div className="flex flex-row justify-between items-center h-20 max-w-6xl mx-auto">
       <NavLink to="/">
         <div className="ml-6">
-          <img src={logo} className="h-9" alt="Logo" />
+          <img src={logo} className="h-14" alt="Logo" />
         </div>
       </NavLink>
       <div className="flex flex-row items-center gap-x-6 mr-6 text-slate-100 -tracking-tighter font-medium">
         <NavLink to="/">
-          <p className="hover:text-[#ff6347] text-black text-lg font-medium cursor-pointer duration-300 transition-all ease-in">
+          <p className="hover:text-[#18cc3c] text-black text-lg font-medium cursor-pointer duration-300 transition-all ease-in">
             Home
           </p>
         </NavLink>
         <NavLink to="/cart">
           <div className="relative ">
-            <FaShoppingCart className="text-2xl text-[#ff6347]" />
+            <FaShoppingCart className="text-2xl text-[#50A060]" />
             {cart.length > 0 && (
               <span className="absolute -top-1 -right-2 bg-black rounded-full text-sm w-5 h-5 grid justify-items-center animate-bounce text-white">
                 {cart.length}
