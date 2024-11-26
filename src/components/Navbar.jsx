@@ -22,7 +22,7 @@ const Navbar = () => {
           <div className="relative ">
             <FaShoppingCart className="text-2xl text-[#50A060]" />
             {cart.length > 0 && (
-              <span className="absolute -top-1 -right-2 bg-black rounded-full text-sm w-5 h-5 grid justify-items-center animate-bounce text-white">
+              <span className="absolute -top-1 -right-2 bg-green-500 rounded-full text-sm w-5 h-5 grid justify-items-center animate-bounce text-white">
                 {cart.length}
               </span>
             )}
